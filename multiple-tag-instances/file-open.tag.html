@@ -37,17 +37,17 @@
       //console.log(e)
     }
 
-    function FileOpen(tag2) {
-      console.log('fileOpened', '_riot_id=' + tag2._riot_id, 'boxid=' + tag2.opts.boxid)
-      tag2.input.value = '' // so we can re-open the same file and still get a change event
-    }
+    var tag = this; // for closure in FileOpen below
 
-    var tag = this; // for closure in 'mount' below
+    function FileOpen() {
+      console.log('fileOpened', '_riot_id=' + tag._riot_id, 'boxid=' + tag.opts.boxid)
+      tag.input.value = '' // so we can re-open the same file and still get a change event
+    }
 
     this.on('mount', function () {
       tag.input = tag.refs['input']
       $(tag.input).on('change', function () {
-        FileOpen(tag)
+        FileOpen()
       })
     })
   </script>
