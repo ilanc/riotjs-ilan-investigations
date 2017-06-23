@@ -2,7 +2,7 @@
   <label class="viewer" onclick={click} for="fileopen{_riot_id}">
     <div class="content">{opts.boxid}</div>
   </label>
-  <input id="fileopen{_riot_id}" type="file" class="file-open-input" ref="input" onchange={fileOpened}>
+  <input id="fileopen{_riot_id}" type="file" class="file-open-input" ref="input">
 
   <style>
     .viewer {
@@ -37,9 +37,18 @@
       //console.log(e)
     }
 
-    fileOpened = (e) => {
-      console.log('fileOpened', '_riot_id=' + this._riot_id, 'boxid=' + this.opts.boxid)
-      //console.log(e)
+    function FileOpen(tag2) {
+      console.log('fileOpened', '_riot_id=' + tag2._riot_id, 'boxid=' + tag2.opts.boxid)
+      tag2.input.value = '' // so we can re-open the same file and still get a change event
     }
+
+    var tag = this; // for closure in 'mount' below
+
+    this.on('mount', function () {
+      tag.input = tag.refs['input']
+      $(tag.input).on('change', function () {
+        FileOpen(tag)
+      })
+    })
   </script>
 </file-open>
