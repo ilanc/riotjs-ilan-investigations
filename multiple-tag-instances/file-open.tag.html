@@ -1,8 +1,8 @@
 <file-open>
-  <label class="viewer" onclick={click} for="fileopen">
+  <label class="viewer" onclick={click} for="fileopen{_riot_id}">
     <div class="content">{opts.boxid}</div>
   </label>
-  <input id="fileopen" type="file" class="file-open-input" ref="input" onchange={fileOpened}>
+  <input id="fileopen{_riot_id}" type="file" class="file-open-input" ref="input" onchange={fileOpened}>
 
   <style>
     .viewer {
@@ -30,16 +30,15 @@
   </style>
 
   <script>
-    console.log('file-open', opts.boxid)
-    this.boxid = opts.boxid
+    console.log('file-open', '_riot_id=' + this._riot_id, 'boxid=' + this.opts.boxid)
 
     click = (e) => {
-      console.log('click', '_riot_id=' + this._riot_id, 'boxid=' + this.boxid)
+      console.log('click', '_riot_id=' + this._riot_id, 'boxid=' + this.opts.boxid)
       //console.log(e)
     }
 
     fileOpened = (e) => {
-      console.log('fileOpened', '_riot_id=' + this._riot_id, 'boxid=' + this.boxid)
+      console.log('fileOpened', '_riot_id=' + this._riot_id, 'boxid=' + this.opts.boxid)
       //console.log(e)
     }
   </script>
