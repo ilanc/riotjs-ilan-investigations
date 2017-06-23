@@ -11,5 +11,8 @@
 
   <script>
     console.log('app')
+    this.on('mount', function () {
+      console.log('app mount', this._riot_id)
+    })
   </script>
 </app>

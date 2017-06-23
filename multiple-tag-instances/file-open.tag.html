@@ -2,7 +2,7 @@
   <label class="viewer" onclick={click} for="fileopen{_riot_id}">
     <div class="content">{opts.boxid}</div>
   </label>
-  <input id="fileopen{_riot_id}" type="file" class="file-open-input" ref="input">
+  <input id="fileopen{_riot_id}" type="file" class="file-open-input" ref="input" onchange={fileOpen}>
 
   <style>
     .viewer {
@@ -40,11 +40,19 @@
     var tag = this; // for closure in FileOpen below
 
     function FileOpen() {
-      console.log('fileOpened', '_riot_id=' + tag._riot_id, 'boxid=' + tag.opts.boxid)
+      console.log('jQuery FileOpened', '_riot_id=' + tag._riot_id, 'boxid=' + tag.opts.boxid)
       tag.input.value = '' // so we can re-open the same file and still get a change event
     }
 
+    this.fileOpen = (e) => {
+      // this is actually working now that input[id] is unique
+      console.log('riotJs fileOpened tag', '_riot_id=' + tag._riot_id, 'boxid=' + tag.opts.boxid)
+      console.log('riotJs fileOpened this', '_riot_id=' + this._riot_id, ' thisboxid=' + this.opts.boxid)
+    }
+
     this.on('mount', function () {
+      console.log('file-open mount', this._riot_id, this.opts.boxid)
+
       tag.input = tag.refs['input']
       $(tag.input).on('change', function () {
         FileOpen()

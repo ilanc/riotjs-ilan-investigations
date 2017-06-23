@@ -25,6 +25,10 @@
     console.log('box', opts.boxid)
     this.boxid = opts.boxid
 
+    this.on('mount', function () {
+      console.log('box mount', this._riot_id, this.boxid)
+    })
+
     click = (e) => {
       console.log(this._riot_id, this.boxid)
       console.log(e)
