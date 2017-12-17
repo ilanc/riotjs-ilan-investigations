@@ -1,6 +1,8 @@
 # Simple
 
-see http://plnkr.co/edit/AFig4K?p=preview
+see:
+* http://plnkr.co/edit/AFig4K?p=preview
+* https://github.com/riot/riot/issues/2122
 
 ## How to run
 * run `run.bat`
