@@ -1,0 +1,17 @@
+<html>
+    <head>
+      <title>Hello Riot.</title>
+    </head>
+    <body>
+        <input model="message" value="hola">
+        <input model="message2" value="que tal">
+        <button onclick="myclick()">click</button>
+        <script>
+          function myclick() {
+            document.querySelectorAll('input')[0].value = "blah";
+            document.querySelectorAll('input')[1].value = "diblah";
+            console.log('myclick');
+          }
+        </script>
+    </body>
+  </html>

@@ -1,0 +1,18 @@
+<my-tag>
+  <input model="message" value={message}>
+  <input model="message2" value={message2}>
+  <button onclick={ click }>click</button>
+
+  <script>
+    this.mixin('TwoWayMixin')
+
+    this.message = 'hello there'
+    this.message2 = 'que tal'
+
+    this.click = (e) => {
+      this.message = 'blah'
+      this.message2 = 'diblah'
+      this.update()
+    }
+  </script>
+</my-tag>

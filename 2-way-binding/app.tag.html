@@ -1,0 +1,40 @@
+<app>
+  <my-tag></my-tag>
+
+  <style>
+  </style>
+
+  <script type="text/javascript">
+    var TwoWayMixin = {
+      init: function () {
+        this.on('mount', function () {
+          var twoWayInputs = this.root.querySelectorAll("input[model]");
+          for (i = 0; i < twoWayInputs.length; i++) {
+            var twoWayInput = twoWayInputs[i];
+
+            if (twoWayInput.addEventListener) {
+              if (!twoWayInput.onkeyup) {
+                twoWayInput.addEventListener("keyup", function (evt) {
+                  this.updateModel(evt);
+                }.bind(this), false);
+              }
+              if (!twoWayInput.onchange) {
+                twoWayInput.addEventListener("change", function (evt) {
+                  this.updateModel(evt);
+                }.bind(this), false);
+              }
+            }
+          }
+        });
+      },
+      updateModel: function (e, p) {
+        var modelPropertyName = e.target.attributes["model"].value;
+        this[modelPropertyName] = e.target.value
+        this.update() // NOTE: my-tag.click doesn't update() unless we update() here
+        console.log(this)
+      }
+    }
+
+    riot.mixin('TwoWayMixin', TwoWayMixin)
+  </script>
+</app>
