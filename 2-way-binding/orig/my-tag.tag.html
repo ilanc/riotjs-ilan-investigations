@@ -1,0 +1,16 @@
+<my-tag>
+  <input model="message">
+  <input model="message2">
+  <button onclick={ next }>click</button>
+
+  <script>
+    this.message = 'hello there'
+    this.message2 = 'que tal'
+
+    this.next = (e) => {
+      this.message = 'blah';
+      this.message2 = 'diblah';
+      this.update();
+    }
+  </script>
+</my-tag>

@@ -1,0 +1,53 @@
+<html>
+
+<head>
+  <title>Hello Riot.</title>
+</head>
+
+<body>
+  <my-tag></my-tag>
+
+  <script src="https://cdn.jsdelivr.net/npm/riot@3.6/riot+compiler.js"></script>
+  <script type="riot/tag" src="my-tag.tag.html"></script>
+
+  <script type="text/javascript">
+    var TwoWayMixin = {
+      init: function () {
+        this.on('mount', function () {
+          var twoWayInputs = this.root.querySelectorAll("input[model]");
+          for (i = 0; i < twoWayInputs.length; i++) {
+            var twoWayInput = twoWayInputs[i];
+
+            if (twoWayInput.addEventListener) {
+              if (!twoWayInput.onkeyup) {
+                twoWayInput.addEventListener("keyup", function (evt) {
+                  this.updateModel(evt);
+                }.bind(this), false);
+              }
+              if (!twoWayInput.onchange) {
+                twoWayInput.addEventListener("change", function (evt) {
+                  this.updateModel(evt);
+                }.bind(this), false);
+              }
+            }
+          }
+        });
+      },
+      updateModel: function (e, p) {
+        var modelPropertyName = e.target.attributes["model"].value;
+        this[modelPropertyName] = e.target.value
+        console.log(this)
+      }
+    }
+
+    riot.mixin(TwoWayMixin)
+    riot.compile(() => {
+      var tag = riot.util.tags.getTag(document.querySelector('my-tag'))
+      tag.tmpl = tag.tmpl.replace(/model="([^"]+)"/g, 'model="$1" value={$1}')
+      var mine = riot.mount('*')[0]
+      setTimeout(() => { mine.message = 'bye'; mine.message2 = 'adios'; mine.update() }, 1000)
+    })
+  </script>
+</body>
+
+</html>
