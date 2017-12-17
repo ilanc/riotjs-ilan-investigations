@@ -1,0 +1,48 @@
+<app>
+  See http://riotjs.com/guide/#event-handlers-with-looped-items<br>
+  Try click on green
+  <p class="AAA" each="{ name, i in arr }" onclick="console.log({i});">{ i }: { name }</p>
+  <p class="BBB" each="{ o, i in obj_arr }" onclick="console.log({o});">{ i }: { JSON.stringify(o) }</p>
+  <p class="CCC" each="{ o, i in obj_arr }" onclick={ parent.log }>{ i }: { JSON.stringify(o) }</p>
+  <div each={ items }>
+    <h3>{ title }</h3>
+    <a onclick={ parent.remove }>Remove</a>
+  </div>
+
+  <style>
+    .AAA {
+      color: red;
+    }
+
+    .BBB {
+      color: blue;
+    }
+
+    .CCC {
+      color: green;
+    }
+  </style>
+  <script>
+    this.arr = [true, 110, Math.random(), 'fourth'];
+
+    this.obj_arr = [{ a: 1, b: 2 }, { a: 2, b: 2 }, { a: 3, b: 2 }, { a: 4, b: 2 }];
+
+    log(event) {
+      // looped item
+      var item = event.item
+
+      // index on the collection
+      var index = this.obj_arr.indexOf(item.o)
+
+      // remove from collection
+      console.log('log', index, item); // this.obj_arr[i]
+      item.o.a++;
+    }
+
+    this.items = [{ title: 'First' }, { title: 'Second' }]
+
+    remove(e) {
+      console.log('remove', e);
+    }
+  </script>
+</app>
