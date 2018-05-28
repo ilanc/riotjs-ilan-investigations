@@ -1,0 +1,21 @@
+<login-failed>
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <i class="fas fa-exclamation-triangle"></i> { data.title }
+    </div>
+    <div class="panel-body">
+      <p>{ data.message }</p>
+    </div>
+  </div>
+
+  <script>
+    let tag = this;
+    tag.data = {
+      title: '',
+      message: ''
+    };
+
+    let initOnce = Once(init_error);
+    initOnce(tag, 'login-failed');
+  </script>
+</login-failed>

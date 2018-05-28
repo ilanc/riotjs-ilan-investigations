@@ -1,0 +1,13 @@
+{
+  "code": "login-failed",
+  "description": "this occurs when the user supplies invalid login credentials, you should ask the user to fix their credentials and try again",
+  "site": "*",
+  "function": "/login",
+  "ux": "https://api-v5.spikedata.co.za/errors/login-failed",
+  "uxdata": {
+    "title": "Login failed",
+    "message": "The login credentials which you have supplied are incorrect. Please re-enter your credentials and try again."
+  },
+  "created": "2018-05-01T00:00:00.000Z",
+  "obsolete": false
+}
