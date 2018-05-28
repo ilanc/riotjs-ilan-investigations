@@ -2,7 +2,7 @@
 
 ## How to run
 * run `run.bat`
-* browse http://127.0.0.1:8080/multiple-tag-instances/
+* browse http://127.0.0.1:8008/multiple-tag-instances/
 
 ## Overview
 
@@ -55,7 +55,7 @@ This is the sequence of noteworthy events during `riot.mount('app')`
   * e.g. safe to access any refs `tag.input = tag.refs['input']`
 4. mount the children
 
-See console.log for `http://127.0.0.1:8080/multiple-tag-instances/`
+See console.log for `http://127.0.0.1:8008/multiple-tag-instances/`
 ```
 app                                       app.tag.html.js:2
 box 1                                     box.tag.html.js:2

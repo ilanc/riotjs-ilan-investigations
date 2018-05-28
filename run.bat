@@ -1,1 +1,1 @@
-live-server
+live-server --port=8008
