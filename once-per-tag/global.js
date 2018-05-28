@@ -16,7 +16,7 @@ async function fetch_error(error) {
 }
 
 async function init_error(tag, DATA) {
-  // NOTE: returns runOne(), which itself returns a Promise (fetch_error)
+  // NOTE: returns runOnce(), which itself returns a Promise (fetch_error)
   // Hence 2nd+ call to init_error(tag2+) will await the same Promise which is busy fetching DATA
   let errorJson = await Once(fetch_error)(DATA);
   if (errorJson.data) {
