@@ -1,5 +1,6 @@
 async function fetch_error(error) {
   let url = error + '.json';
+  console.log('fetch', url);
   try {
     const response = await fetch(url, { method: 'GET' });
     const json = await response.json();
@@ -14,7 +15,10 @@ async function fetch_error(error) {
   }
 }
 
-function init_error(tag, errorJson) {
+async function init_error(tag, DATA) {
+  // NOTE: returns runOne(), which itself returns a Promise (fetch_error)
+  // Hence 2nd+ call to init_error(tag2+) will await the same Promise which is busy fetching DATA
+  let errorJson = await Once(fetch_error)(DATA);
   if (errorJson.data) {
     tag.data = errorJson.data.uxdata;
     tag.update();
@@ -23,18 +27,18 @@ function init_error(tag, errorJson) {
   }
 }
 
-// Modied from: https://medium.freecodecamp.org/here-are-a-few-function-decorators-you-can-write-from-scratch-488549fe8f86
+// Modified from: https://medium.freecodecamp.org/here-are-a-few-function-decorators-you-can-write-from-scratch-488549fe8f86
 const _once = {};
-function Once(cb) {
+function Once(fn) {
   let e = new Error();
   let stack = e.stack.split('\n');
-  let fn = stack[2];
+  let caller = stack[2];
   return function runOnce() {
-    if (!_once.hasOwnProperty(fn)) {
-      console.log('once =>', fn, cb);
-      _once[fn] = cb.apply(this, arguments);
+    if (!_once.hasOwnProperty(caller)) {
+      console.log('once =>', caller);
+      _once[caller] = fn.apply(this, arguments);
     }
-    return _once[fn];
+    return _once[caller];
   }
 }
 // usage:

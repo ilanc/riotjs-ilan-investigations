@@ -15,10 +15,6 @@
       message: ''
     };
 
-    let fetchResult = Once(fetch_error)('login-failed');
-    (async () => {
-      let json = await fetchResult;
-      init_error(tag, json);
-    })();
+    init_error(tag, 'login-failed');
   </script>
 </login-failed>
