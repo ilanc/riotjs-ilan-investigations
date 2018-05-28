@@ -14,13 +14,12 @@ async function fetch_error(error) {
   }
 }
 
-async function init_error(tag, DATA) {
-  let errorJson = await fetch_error(DATA);
+function init_error(tag, errorJson) {
   if (errorJson.data) {
     tag.data = errorJson.data.uxdata;
     tag.update();
   } else {
-    alert('Failed to load data: ' + DATA);
+    alert('Failed to load data');
   }
 }
 

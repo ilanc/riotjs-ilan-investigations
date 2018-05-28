@@ -21,11 +21,12 @@ Features to note:
 * Code to fetch `load-failed.json` is initiated in `login-failed.tag.html`:
 
 ```js
-let initOnce = Once(init_error);
-initOnce(tag, 'login/login-failed');
+let fetchResult = Once(fetch_error)('login-failed');
+(async () => {
+  let json = await fetchResult;
+  init_error(tag, json);
+})();
 ```
 
 * `function Once` is implemented in `global.js`:
   * it uses the file:line of the caller to determine whether the call has been invoked
-* Only the first tag is populated
-  * TODO: change once(init_error) to once(fetch_error)
