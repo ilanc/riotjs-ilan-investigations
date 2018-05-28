@@ -28,4 +28,4 @@ initOnce(tag, 'login/login-failed');
 * `function Once` is implemented in `global.js`:
   * it uses the file:line of the caller to determine whether the call has been invoked
 * Only the first tag is populated
-  * TODO: change global.js-init_error to use a DATA => promise map, so
+  * TODO: change once(init_error) to once(fetch_error)
